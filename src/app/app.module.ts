@@ -7,6 +7,7 @@ import { AppRoutingModule } from "./app-routing/app-routing.module";
 import { HomeComponent } from "./home/home.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { MatButtonModule } from "@angular/material/button";
 
 @NgModule({
   declarations: [AppComponent, LevelsComponent, HomeComponent],
@@ -15,6 +16,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     AppRoutingModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
