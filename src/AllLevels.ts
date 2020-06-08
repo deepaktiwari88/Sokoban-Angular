@@ -5,7 +5,7 @@ export var allLevels = [
         "positions": {
             "man": [2, 3],
             "boxes": [[2, 2], [3, 2]],
-            "target": [[2, 2], [3, 1]
+            "target": [[1, 2], [3, 1]
             ],
         },
         "grid": [

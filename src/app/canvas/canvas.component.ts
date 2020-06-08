@@ -12,6 +12,7 @@ import { stringify } from "querystring";
   styleUrls: ["./canvas.component.scss"],
 })
 export class CanvasComponent implements OnInit {
+ 
   allLevels: {
     level: number;
     "target-moves": number;
@@ -22,7 +23,6 @@ export class CanvasComponent implements OnInit {
     };
     grid: number[][];
   }[];
-
   currentLevel: {
     level: number;
     "target-moves": number;
@@ -40,10 +40,7 @@ export class CanvasComponent implements OnInit {
   public board = [];
   private sub: any;
 
-  public x = 0;
-  public y = 0;
-  public a = 3;
-  public b = 3;
+ 
 
   public boxesPosition: {};
   public targetsPosition: {};
@@ -78,7 +75,7 @@ export class CanvasComponent implements OnInit {
       }
     }
     this.board[0][0] = true;
-    this.board[this.a][this.b] = true;
+    
   }
 
   
@@ -126,55 +123,108 @@ export class CanvasComponent implements OnInit {
   }
 
   moveLeft() {
-    this.board[this.x][this.y] = false;
-    this.x = this.x - 1;
-    this.board[this.x][this.y] = true;
-    this.setImage(this.x, this.y);
+    
+    this.board[this.manPosition[0]][this.manPosition[1]] = false;
+    
+    if(this.checkBox(this.manPosition[0],this.manPosition[1]-1)==true)
+    {if((this.boxesPosition[0][0]==this.manPosition[0] && this.manPosition[0][1]==this.manPosition[1]-1)) 
+      {
+        this.manPosition[1]=this.manPosition[1]-1;
+        this.boxesPosition[0][1]=this.boxesPosition[0][1]-1;
+        this.setImage(this.boxesPosition[0][0],this.boxesPosition[0][1]);
+      }
+     else if(this.boxesPosition[1][0]==this.manPosition[0] && this.boxesPosition[1][1]==this.manPosition[1]-1)
+      {this.manPosition[1]=this.manPosition[1]-1;
+      this.boxesPosition[1][1]=this.boxesPosition[1][1]-1;
+      this.setImage(this.boxesPosition[1][0],this.boxesPosition[1][1]);
+    }
+      else
+      {
+        this.manPosition[1]=this.manPosition[1]-1;
+      }
+    }
+  
+    this.board[this.manPosition[0]][this.manPosition[1]] = true;
+    this.setImage(this.manPosition[0], this.manPosition[1]);
+    
   }
   moveRight() {
-    this.board[this.x][this.y] = false;
-    this.x = this.x + 1;
-    if (this.x == BOARD_SIZE) {
-      this.x = this.x - 1;
+    this.board[this.manPosition[0]][this.manPosition[1]] = false;
+   
+    if(this.checkBox(this.manPosition[0],this.manPosition[1]+1)==true)
+    {if((this.boxesPosition[0][0]==this.manPosition[0] && this.boxesPosition[0][1]==this.manPosition[1]+1)) 
+      {
+        this.manPosition[1]=this.manPosition[1]+1;
+        this.boxesPosition[0][1]=this.boxesPosition[0][1]+1;
+        this.setImage(this.boxesPosition[0][0],this.boxesPosition[0][1]);
+      }
+     else if(this.boxesPosition[1][0]==this.manPosition[0] && this.boxesPosition[1][1]==this.manPosition[1]+1)
+      {this.manPosition[1]=this.manPosition[1]+1;
+      this.boxesPosition[1][1]=this.boxesPosition[1][1]+1;
+      this.setImage(this.boxesPosition[1][0],this.boxesPosition[1][1]);
     }
-    this.board[this.x][this.y] = true;
-    this.setImage(this.x, this.y);
+      else
+      {
+        this.manPosition[1]=this.manPosition[1]+1;
+      }
+    }
+    this.board[this.manPosition[0]][this.manPosition[1]] = true;
+    this.setImage(this.manPosition[0], this.manPosition[1]);
   }
   moveUp() {
-    if(this.checkBox(this.x,this.y-1,this.a,this.b)==true)
-    {
-      this.board[this.x][this.y] = false;
-      this.y = this.y - 1;
-      this.b=this.b-1;
-      this.board[this.x][this.y] = true;
-      this.board[this.a][this.b]=true;
-      this.setImage(this.x, this.y);
-      
+    
+    this.board[this.manPosition[0]][this.manPosition[1]] = false;
+  
+    if(this.checkBox(this.manPosition[0]-1,this.manPosition[1])==true)
+    {if((this.boxesPosition[0][0]==this.manPosition[0]-1 && this.manPosition[0][1]==this.manPosition[1])) 
+      {
+        this.manPosition[0]=this.manPosition[0]-1;
+        this.boxesPosition[0][0]=this.boxesPosition[0][0]-1;
+        this.setImage(this.boxesPosition[0][0],this.boxesPosition[0][1]);
+      }
+     else if(this.boxesPosition[1][0]==this.manPosition[0]-1 && this.boxesPosition[1][1]==this.manPosition[1])
+      {this.manPosition[0]=this.manPosition[0]-1;
+      this.boxesPosition[1][0]=this.boxesPosition[1][0]-1;
+      this.setImage(this.boxesPosition[1][0],this.boxesPosition[1][1]);
     }
-    else{
-    this.board[this.x][this.y] = false;
-    this.y = this.y - 1;
-    if (this.y == -1) {
-      this.y = this.y + 1;
+      else
+      {
+        this.manPosition[0]=this.manPosition[0]-1;
+      }
+     
     }
-    this.board[this.x][this.y] = true;
-    this.setImage(this.x, this.y);
-  }
+    this.board[this.manPosition[0]][this.manPosition[1]] = true;
+    this.setImage(this.manPosition[0], this.manPosition[1]);
   };
   moveDown() {
-    this.board[this.x][this.y] = false;
-    this.y = this.y + 1;
-    if (this.y == BOARD_SIZE) {
-      this.y = this.y - 1;
+    this.board[this.manPosition[0]][this.manPosition[1]] = false;
+    if(this.checkBox(this.manPosition[0]+1,this.manPosition[1])==true)
+    {
+      if((this.boxesPosition[0][0]==this.manPosition[0]+1 && this.manPosition[0][1]==this.manPosition[1])) 
+      {
+        this.manPosition[0]=this.manPosition[0]+1;
+        this.boxesPosition[0][0]=this.boxesPosition[0][0]+1;
+        this.setImage(this.boxesPosition[0][0],this.boxesPosition[0][1]);
+      }
+     else if(this.boxesPosition[1][0]==this.manPosition[0]+1 && this.boxesPosition[1][1]==this.manPosition[1])
+      {this.manPosition[0]=this.manPosition[0]+1;
+      this.boxesPosition[1][0]=this.boxesPosition[1][0]+1;
+      this.setImage(this.boxesPosition[1][0],this.boxesPosition[1][1]);
     }
-    this.board[this.x][this.y] = true;
-    this.setImage(this.x, this.y);
+      else
+      {
+        this.manPosition[0]=this.manPosition[0]+1;
+      }
+    }
+  
+    this.board[this.manPosition[0]][this.manPosition[1]] = true;
+    this.setImage(this.manPosition[0], this.manPosition[1]);
   }
-  checkBox(i:number,j:number,q:number,w:number) {
-  if(i==q || j==w)
-  {
+  checkBox(i:number,j:number) {
+    if (this.currentLevel.grid[i][j] ==1)
+    {
+      return false;
+    }
     return true;
-  }
-  return false;
 };
 }
