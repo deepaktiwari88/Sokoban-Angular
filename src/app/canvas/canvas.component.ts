@@ -25,6 +25,12 @@ export class CanvasComponent implements OnInit {
   id: number;
   public rows: number = 5;
   public board = [];
+  private sub: any;
+
+  public x = 0;
+  public y = 0;
+  public a = 2;
+  public b = 1;
 
   constructor(
     private route: ActivatedRoute,
@@ -32,11 +38,6 @@ export class CanvasComponent implements OnInit {
   ) {
     this.allLevels = this.levelService.getAllLevels();
   }
-
-  public x = 0;
-  public y = 0;
-  public a = 2;
-  public b = 1;
 
   ngOnInit() {
     this.sub = this.route.params.subscribe((params) => {
