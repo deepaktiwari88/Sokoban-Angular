@@ -118,13 +118,13 @@ export class CanvasComponent implements OnInit {
     for (var i=0;i<this.boxesPosition.length; i++) {
       
       if (this.boxesPosition[i][0] == row && this.boxesPosition[i][1] == col) {
+        
+        returnUrl = "url(" + IMAGES.BOX_WRONG + ")";
 
         for(var j=0; j<this.targetsPosition.length; j++){
           if (this.boxesPosition[i][0] == this.targetsPosition[j][0] && this.boxesPosition[i][1] == this.targetsPosition[j][0]) {
             returnUrl = "url(" + IMAGES.BOX_RIGHT + ")";
-          }
-          else{
-            returnUrl = "url(" + IMAGES.BOX_WRONG + ")";
+            break;
           }
         }
       }
