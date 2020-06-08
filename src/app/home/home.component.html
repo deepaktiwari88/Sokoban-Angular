@@ -1,5 +1,36 @@
 <div fxLayout="column" class="main-block" fxLayoutAlign="center center">
-  <div fxFlex>
-    <h2>Sokoban</h2>
+  <div fxFlex="20">
+    <h2>Sokoban<span class="blinking-cursor">|</span></h2>
+  </div>
+  <div fxFlex="30" class="info-area-container">
+    <p>
+      You got some <span id="iq-text"><b>IQ</b></span> ? Try to crush this
+      puzzling game!
+    </p>
+    <button mat-stroked-button class="center-button">Let's dive in!</button>
+  </div>
+  <div fxFlex="50">
+    <div fxLayout="row" fxLayoutAlign="space-evenly center">
+      <div class="info-block first" fxFlex>
+        <div fxLayout="column" fxLayoutAlign="center start">
+          <h3>Various Levels</h3>
+          <p class="box-description">
+            All new levels are added to twist your brain!
+          </p>
+        </div>
+      </div>
+      <div class="info-block second" fxFlex>
+        <h3>Various Levels</h3>
+        <p class="box-description">
+          All new levels are added to twist your brain!
+        </p>
+      </div>
+      <div class="info-block third" fxFlex>
+        <h3>Various Levels</h3>
+        <p class="box-description">
+          All new levels are added to twist your brain!
+        </p>
+      </div>
+    </div>
   </div>
 </div>
