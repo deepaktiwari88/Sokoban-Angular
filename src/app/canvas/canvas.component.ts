@@ -17,8 +17,8 @@ export class CanvasComponent implements OnInit {
     "target-moves": number;
     positions: {
       man: number[];
-      boxes: {};
-      target: {};
+      boxes: number[][];
+      target: number[][];
     };
     grid: number[][];
   }[];
@@ -28,8 +28,8 @@ export class CanvasComponent implements OnInit {
     "target-moves": number;
     positions: {
       man: number[];
-      boxes: {};
-      target: {};
+      boxes: number[][];
+      target: number[][];
     };
     grid: number[][];
   };
@@ -39,20 +39,21 @@ export class CanvasComponent implements OnInit {
   public columns: number;
   public board = [];
   private sub: any;
+  public targetMoves: number;
 
   public x = 0;
   public y = 0;
   public a = 2;
   public b = 1;
 
-  public boxesPosition: {};
-  public targetsPosition: {};
+  public boxesPosition: number[][];
+  public targetsPosition: number[][];
   public manPosition: number[];
 
   constructor(
     private route: ActivatedRoute,
     private levelService: LevelService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.sub = this.route.params.subscribe((params) => {
@@ -64,6 +65,7 @@ export class CanvasComponent implements OnInit {
       this.manPosition = this.currentLevel.positions.man;
       this.boxesPosition = this.currentLevel.positions.boxes;
       this.targetsPosition = this.currentLevel.positions.target;
+      this.targetMoves = this.currentLevel["target-moves"];
       this.setBoard();
     });
   }
@@ -94,45 +96,46 @@ export class CanvasComponent implements OnInit {
   }
 
   setImage(row: number, col: number): string {
-
     var returnUrl;
 
     if (this.currentLevel.grid[row][col] == 0)
-    returnUrl = "url(" + IMAGES.FREE + ")";
+      returnUrl = "url(" + IMAGES.FREE + ")";
 
     if (
       this.currentLevel.grid[row][col] == 1 ||
       this.currentLevel.grid[row][col] == 2
     )
-    returnUrl = "url(" + IMAGES.BRICK + ")";
+      returnUrl = "url(" + IMAGES.BRICK + ")";
 
     if (this.manPosition[0] == row && this.manPosition[1] == col)
-    returnUrl = "url(" + IMAGES.AVATAR + ")";
+      returnUrl = "url(" + IMAGES.AVATAR + ")";
 
-    for(var i=0; i<this.targetsPosition.length; i++){
-      if (this.targetsPosition[i][0] == row && this.targetsPosition[i][1] == col) {
-        returnUrl =  "url(" + IMAGES.CROSS + ")";
+    for (var i = 0; i < this.targetsPosition.length; i++) {
+      if (
+        this.targetsPosition[i][0] == row &&
+        this.targetsPosition[i][1] == col
+      ) {
+        returnUrl = "url(" + IMAGES.CROSS + ")";
       }
     }
-    
-    for (var i=0;i<this.boxesPosition.length; i++) {
-      
+
+    for (var i = 0; i < this.boxesPosition.length; i++) {
       if (this.boxesPosition[i][0] == row && this.boxesPosition[i][1] == col) {
-        
         returnUrl = "url(" + IMAGES.BOX_WRONG + ")";
 
-        for(var j=0; j<this.targetsPosition.length; j++){
-          if (this.boxesPosition[i][0] == this.targetsPosition[j][0] && this.boxesPosition[i][1] == this.targetsPosition[j][0]) {
+        for (var j = 0; j < this.targetsPosition.length; j++) {
+          if (
+            this.boxesPosition[i][0] == this.targetsPosition[j][0] &&
+            this.boxesPosition[i][1] == this.targetsPosition[j][0]
+          ) {
             returnUrl = "url(" + IMAGES.BOX_RIGHT + ")";
             break;
           }
         }
       }
-
     }
 
     return returnUrl;
-
   }
 
   moveLeft() {
