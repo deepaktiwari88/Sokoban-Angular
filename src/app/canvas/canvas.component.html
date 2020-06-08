@@ -1,6 +1,8 @@
 <div fxLayout="column" fxLayoutAlign="center center" class="canvas-container">
   <div fxflex>
-    <h1>Level: <span class="level">1</span></h1>
+    <h1>
+      Level: <span class="level">{{ id }}</span>
+    </h1>
   </div>
 
   <div fxFlex>
@@ -18,12 +20,12 @@
   <div fxFlex>
     <div class="buttons">
       <button mat-button (click)="moveUp()">
-        <i class="material-icons ">keyboard_arrow_left</i>
+        <i class="material-icons">keyboard_arrow_left</i>
       </button>
       <button mat-button (click)="moveDown()">
         <i class="material-icons">keyboard_arrow_right</i>
       </button>
-      <button mat-button (click)="moveLeft()" >
+      <button mat-button (click)="moveLeft()">
         <i class="material-icons">keyboard_arrow_up</i>
       </button>
 
