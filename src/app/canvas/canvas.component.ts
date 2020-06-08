@@ -107,7 +107,7 @@ export class CanvasComponent implements OnInit {
     returnUrl = "url(" + IMAGES.BRICK + ")";
 
     if (this.manPosition[0] == row && this.manPosition[1] == col)
-    returnUrl = "url(" + IMAGES.AVATAR + ")";
+    returnUrl = "url(" + IMAGES.AVATAR_RIGHT + ")";
 
     for(var i=0; i<this.targetsPosition.length; i++){
       if (this.targetsPosition[i][0] == row && this.targetsPosition[i][1] == col) {
