@@ -1,10 +1,38 @@
-mat-grid-tile {
-  color: black;
-  border-style: solid;
-  height: 100px;
-  width: 100px;
+$border-color: rgba(33, 219, 120, 0.616);
+
+.canvas-container {
+  height: 100vh;
+  background-color: black;
+  color: white;
+  width: 100%;
 }
-.mat-grid-list {
-  border-style: solid;
-  width: 300px;
+.container {
+  position: relative;
+  display: block;
+  margin: auto;
+  background-color: white;
+  border-radius: 5px;
+  border: yellow 10px solid;
+}
+
+.row {
+  height: 70px;
+}
+
+.column {
+  border: 1px solid $border-color;
+  width: 70px;
+  height: 70px;
+  display: inline-block;
+}
+
+.buttons {
+  margin-top: 40px;
+  padding: 5px;
+  border: grey 2px solid;
+  border-radius: 60px;
+}
+
+.level {
+  color: rgb(241, 32, 67);
 }

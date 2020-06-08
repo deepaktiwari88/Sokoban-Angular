@@ -1,27 +1,35 @@
-<div fxLayout="column" fxLayoutAlign="center center">
+<div fxLayout="column" fxLayoutAlign="center center" class="canvas-container">
   <div fxflex>
-    <h2>
-      Level: 1
-    </h2>
+    <h1>Level: <span class="level">1</span></h1>
   </div>
-  <div fxFlex>
-    <mat-grid-list cols="5" rowHeight="50px">
-      <mat-grid-tile *ngFor="let col of rows; let i = index">{{
-        " "
-      }}</mat-grid-tile>
-    </mat-grid-list>
-  </div>
-  <!-- <div class="buttons">
-    <button mat-button>
-      <i class="material-icons">keyboard_arrow_left</i>
-    </button>
-    <button mat-button>
-      <i class="material-icons">keyboard_arrow_right</i>
-    </button>
-    <button mat-button><i class="material-icons">keyboard_arrow_up</i></button>
 
-    <button mat-button>
-      <i class="material-icons">keyboard_arrow_down</i>
-    </button>
-  </div> -->
+  <div fxFlex>
+    <div class="container">
+      <div class="row" *ngFor="let column of board; let i = index">
+        <div
+          class="column"
+          [ngStyle]="{ 'background-color': setColors(i, j) }"
+          *ngFor="let row of column; let j = index"
+        ></div>
+      </div>
+    </div>
+  </div>
+
+  <div fxFlex>
+    <div class="buttons">
+      <button mat-button>
+        <i class="material-icons">keyboard_arrow_left</i>
+      </button>
+      <button mat-button>
+        <i class="material-icons">keyboard_arrow_right</i>
+      </button>
+      <button mat-button>
+        <i class="material-icons">keyboard_arrow_up</i>
+      </button>
+
+      <button mat-button>
+        <i class="material-icons">keyboard_arrow_down</i>
+      </button>
+    </div>
+  </div>
 </div>
