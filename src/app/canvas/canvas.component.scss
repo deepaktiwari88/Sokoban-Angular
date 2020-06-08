@@ -24,6 +24,9 @@ $border-color: rgba(33, 219, 120, 0.616);
   width: 70px;
   height: 70px;
   display: inline-block;
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
 }
 
 .buttons {

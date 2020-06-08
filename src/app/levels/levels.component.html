@@ -1,7 +1,12 @@
 <div class="level-container">
   <h2>Levels</h2>
   <div fxLayout="row" fxLayoutGap="80px" fxLayoutAlign="center">
-    <div class="level-tile" *ngFor="let level of allLevels; let i=index" ><b>{{ level.level }}</b></div>
+    <div *ngFor="let level of allLevels; let i=index">
+      <a [routerLink]="['/levels', level.level]">
+        <div class="level-tile">
+          <b>{{ level.level }}</b>
+        </div>
+      </a>
+    </div>
   </div>
-
 </div>

@@ -1,15 +1,17 @@
 <div fxLayout="column" fxLayoutAlign="center center" class="canvas-container">
   <div fxflex>
-    <h1>Level: <span class="level">1</span></h1>
+    <h1>
+      Level: <span class="level">{{ id }}</span>
+    </h1>
   </div>
 
   <div fxFlex>
     <div class="container">
-      <div class="row" *ngFor="let column of board; let i = index">
+      <div class="row" *ngFor="let row of board; let i = index">
         <div
           class="column"
-          [ngStyle]="{ 'background-color': setColors(i, j) }"
-          *ngFor="let row of column; let j = index"
+          [ngStyle]="{ 'background-image': setImage(i, j) }"
+          *ngFor="let column of row; let j = index"
         ></div>
       </div>
     </div>
@@ -18,12 +20,12 @@
   <div fxFlex>
     <div class="buttons">
       <button mat-button (click)="moveUp()">
-        <i class="material-icons ">keyboard_arrow_left</i>
+        <i class="material-icons">keyboard_arrow_left</i>
       </button>
       <button mat-button (click)="moveDown()">
         <i class="material-icons">keyboard_arrow_right</i>
       </button>
-      <button mat-button (click)="moveLeft()" >
+      <button mat-button (click)="moveLeft()">
         <i class="material-icons">keyboard_arrow_up</i>
       </button>
 
