@@ -1,11 +1,16 @@
+<<<<<<< HEAD
 import { Component, OnInit } from '@angular/core';
 import {COLORS,BOARD_SIZE} from './constants';
 import { BROWSER_ANIMATIONS_PROVIDERS } from '@angular/platform-browser/animations/src/providers';
+=======
+import { Component, OnInit } from "@angular/core";
+import { COLORS } from "./constants";
+>>>>>>> 4d0d522bad94148d199b81366cd1e7a7c3d2454e
 
 @Component({
-  selector: 'app-canvas',
-  templateUrl: './canvas.component.html',
-  styleUrls: ['./canvas.component.scss']
+  selector: "app-canvas",
+  templateUrl: "./canvas.component.html",
+  styleUrls: ["./canvas.component.scss"],
 })
 export class CanvasComponent implements OnInit {
 
@@ -45,7 +50,8 @@ setColors(col: number, row: number): string {
   return COLORS.BOARD;
 };
 moveLeft()
-{this.board[this.x][this.y]=false;
+{
+  this.board[this.x][this.y]=false;
   this.x=this.x-1;
   this.board[this.x][this.y]=true;
   this.setColors(this.y,this.x);

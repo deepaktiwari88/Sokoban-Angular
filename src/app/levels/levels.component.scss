@@ -1,17 +1,39 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+
+h2 {
+  color: blueviolet;
+  font-family: "Press Start 2P", cursive;
+  font-weight: 400;
+  font-size: 3rem;
+  text-align: center;
+}
+
 .level-container{
     margin: 20px 200px 20px 200px;
-    background: grey;
-    padding: 20px 50px 20px 50px;
+    background: black;
+    padding: 20px 150px 20px 150px !important;
 }
 
 .level-container h1 {
     text-align: center;
 }
+
 .level-tile {
-    color: white;
-    height: 100px;
-    width: 100px;
-    margin: 20px;
+    cursor: pointer;
+    color: black;
+    height: 120px;
+    width: 120px;
     background-color: white;
     border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+
+}
+
+.level-tile:hover {
+    background-color: grey;
+    color: white;
 }

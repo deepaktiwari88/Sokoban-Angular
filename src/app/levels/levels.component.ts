@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { allLevels } from 'src/AllLevels';
 
 @Component({
   selector: 'app-levels',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LevelsComponent implements OnInit {
 
-  constructor() { }
+  private allLevels: any[];
+
+  constructor() { 
+    this.allLevels = allLevels;
+  }
 
   ngOnInit() {
   }

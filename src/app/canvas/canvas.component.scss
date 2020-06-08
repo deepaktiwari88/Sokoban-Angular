@@ -1,34 +1,38 @@
+$border-color: rgba(33, 219, 120, 0.616);
 
-  .container
-  {
-    
-    position: relative;
-    display: block;
-    margin-top:30%;
-    margin-left: 20%;
-    background-color: white;
-    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
-    border-radius: 5px;
-  }
-  .game-header {
-    color: #fff;
-    padding: 5px 15px 5px 0px;
-    position: relative;
-  }
-  .buttons
-  {display: flex;
-      max-width:250px;
-      margin-top: 30%;
-      margin-left:100%;
-  }
-  .row {
-    height: 100px;
-  }
-  
-  .column {
-    border: 1px solid black;
-   width: 100px;
-    height: 100px;
-    display: inline-block;
-  }
+.canvas-container {
+  height: 100vh;
+  background-color: black;
+  color: white;
+  width: 100%;
+}
+.container {
+  position: relative;
+  display: block;
+  margin: auto;
+  background-color: white;
+  border-radius: 5px;
+  border: yellow 10px solid;
+}
 
+.row {
+  height: 70px;
+}
+
+.column {
+  border: 1px solid $border-color;
+  width: 70px;
+  height: 70px;
+  display: inline-block;
+}
+
+.buttons {
+  margin-top: 40px;
+  padding: 5px;
+  border: grey 2px solid;
+  border-radius: 60px;
+}
+
+.level {
+  color: rgb(241, 32, 67);
+}
