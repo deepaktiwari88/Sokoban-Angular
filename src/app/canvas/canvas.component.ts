@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 
 import { ActivatedRoute } from "@angular/router";
-import { COLORS, BOARD_SIZE } from "./constants";
+import { COLORS, BOARD_SIZE, IMAGES } from "./constants";
 import { BROWSER_ANIMATIONS_PROVIDERS } from "@angular/platform-browser/animations/src/providers";
 import { LevelService } from "../services/levels.service";
 
@@ -16,14 +16,26 @@ export class CanvasComponent implements OnInit {
     "target-moves": number;
     positions: {
       man: number[];
-      boxes: { 1: number[]; 2: number[] };
-      target: { 1: number[]; 2: number[] };
+      boxes: {};
+      target: {};
     };
     grid: number[][];
   }[];
 
+  currentLevel: {
+    level: number;
+    "target-moves": number;
+    positions: {
+      man: number[];
+      boxes: {};
+      target: {};
+    };
+    grid: number[][];
+  };
+
   id: number;
-  public rows: number = 5;
+  public rows: number;
+  public columns: number;
   public board = [];
   private sub: any;
 
@@ -35,28 +47,32 @@ export class CanvasComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private levelService: LevelService
-  ) {
-    this.allLevels = this.levelService.getAllLevels();
-  }
+  ) {}
 
   ngOnInit() {
     this.sub = this.route.params.subscribe((params) => {
       this.id = +params["id"];
+      this.allLevels = this.levelService.getAllLevels();
+      this.currentLevel = this.allLevels.filter((x) => x.level == this.id)[0];
+      this.rows = this.currentLevel.grid.length;
+      this.columns = this.currentLevel.grid[0].length;
+      this.setBoard();
     });
-    this.setBoard();
   }
+
   setBoard(): void {
     this.board = [];
 
-    for (let i = 0; i < BOARD_SIZE; i++) {
+    for (let i = 0; i < this.rows; i++) {
       this.board[i] = [];
-      for (let j = 0; j < BOARD_SIZE; j++) {
+      for (let j = 0; j < this.columns; j++) {
         this.board[i][j] = false;
       }
     }
     this.board[0][0] = true;
     this.board[this.a][this.b] = true;
   }
+
   setColors(col: number, row: number): string {
     if (this.board[col][row] === true && col === this.a && row === this.b)
       return COLORS.BOX;
@@ -68,6 +84,20 @@ export class CanvasComponent implements OnInit {
     }
     return COLORS.BOARD;
   }
+
+  setImage(row: number, col: number): string {
+    if (this.currentLevel.grid[row][col] == 0)
+      return "url(" + IMAGES.FREE + ")";
+
+    if (
+      this.currentLevel.grid[row][col] == 1 ||
+      this.currentLevel.grid[row][col] == 2
+    )
+      return "url(" + IMAGES.BRICK + ")";
+
+    return "url(" + IMAGES.AVATAR + ")";
+  }
+
   moveLeft() {
     this.board[this.x][this.y] = false;
     this.x = this.x - 1;

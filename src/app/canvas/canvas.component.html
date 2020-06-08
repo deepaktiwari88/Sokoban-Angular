@@ -7,11 +7,11 @@
 
   <div fxFlex>
     <div class="container">
-      <div class="row" *ngFor="let column of board; let i = index">
+      <div class="row" *ngFor="let row of board; let i = index">
         <div
           class="column"
-          [ngStyle]="{ 'background-color': setColors(i, j) }"
-          *ngFor="let row of column; let j = index"
+          [ngStyle]="{ 'background-image': setImage(i, j) }"
+          *ngFor="let column of row; let j = index"
         ></div>
       </div>
     </div>
