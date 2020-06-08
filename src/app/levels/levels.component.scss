@@ -1,8 +1,17 @@
 .level-container{
     margin: 20px 200px 20px 200px;
-    background: blue;
+    background: grey;
+    padding: 20px 50px 20px 50px;
 }
 
+.level-container h1 {
+    text-align: center;
+}
 .level-tile {
     color: white;
+    height: 100px;
+    width: 100px;
+    margin: 20px;
+    background-color: white;
+    border-radius: 10px;
 }
