@@ -58,23 +58,21 @@
       </div>
     </div>
 
-    <div fxFlex>
-      <div class="buttons">
-        <span style="padding-left: 10px;">Controls:</span>
-        <button mat-button (click)="moveUp()">
-          <i class="material-icons">keyboard_arrow_left</i>
-        </button>
-        <button mat-button (click)="moveDown()">
-          <i class="material-icons">keyboard_arrow_right</i>
-        </button>
-        <button mat-button (click)="moveLeft()">
-          <i class="material-icons">keyboard_arrow_up</i>
-        </button>
+  <div fxFlex>
+    <div class="buttons">
+      <button mat-button (click)="moveUp()">
+        <i class="material-icons">keyboard_arrow_up</i>
+      </button>
+      <button mat-button (click)="moveDown()">
+        <i class="material-icons">keyboard_arrow_down</i>
+      </button>
+      <button mat-button (click)="moveLeft()">
+        <i class="material-icons">keyboard_arrow_left</i>
+      </button>
 
-        <button mat-button (click)="moveRight()">
-          <i class="material-icons">keyboard_arrow_down</i>
-        </button>
-      </div>
+      <button mat-button (click)="moveRight()">
+        <i class="material-icons">keyboard_arrow_right</i>
+      </button>
     </div>
   </div>
 </div>
