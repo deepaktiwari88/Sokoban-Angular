@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {COLORS} from './constants';
 
 @Component({
   selector: 'app-canvas',
@@ -6,14 +7,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./canvas.component.scss']
 })
 export class CanvasComponent implements OnInit {
-public rows:Array<String>=[];
+public rows:number=5;
+public board=[];
   constructor() { }
 
   ngOnInit() {
-    for(let i =0;i<25;i++)
-    {
-this.rows.push(' ');
-    }
+    this.setBoard();
   }
+  setBoard(): void {
+    this.board = [];
+
+    for (let i = 0; i < this.rows; i++) {
+      this.board[i] = [];
+      for (let j = 0; j < this.rows; j++) {
+        this.board[i][j] = false;
+      }
+    }
+}
+setColors(col: number, row: number): string {
+ 
+
+  return COLORS.BOARD;
+};
 
 }
