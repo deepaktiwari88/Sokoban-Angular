@@ -1,26 +1,27 @@
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+<div fxLayout="column" fxLayoutAlign="center center">
+  <div fxflex>
+    <h2>
+      Level: 1
+    </h2>
+  </div>
+  <div fxFlex>
+    <mat-grid-list cols="5" rowHeight="50px">
+      <mat-grid-tile *ngFor="let col of rows; let i = index">{{
+        " "
+      }}</mat-grid-tile>
+    </mat-grid-list>
+  </div>
+  <!-- <div class="buttons">
+    <button mat-button>
+      <i class="material-icons">keyboard_arrow_left</i>
+    </button>
+    <button mat-button>
+      <i class="material-icons">keyboard_arrow_right</i>
+    </button>
+    <button mat-button><i class="material-icons">keyboard_arrow_up</i></button>
 
-<div class="container">
-<mat-grid-list cols="5" rowHeight="50px">
-  <mat-grid-tile *ngFor="let col of rows;let i=index">{{" "}}</mat-grid-tile>
-</mat-grid-list>
-<div class="buttons">
-  <button mat-button>
-    <i class="material-icons">keyboard_arrow_left</i>
-  </button>
-  <button mat-button><i class="material-icons">keyboard_arrow_right</i>
-  </button>
-  <button mat-button> <i class="material-icons">keyboard_arrow_up</i></button>
- 
-  <button mat-button>
-    <i class="material-icons">keyboard_arrow_down</i>
-  </button>
+    <button mat-button>
+      <i class="material-icons">keyboard_arrow_down</i>
+    </button>
+  </div> -->
 </div>
-
-</div>
-
-
-
-
-

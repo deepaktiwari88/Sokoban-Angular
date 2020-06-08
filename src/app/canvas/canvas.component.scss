@@ -1,23 +1,10 @@
 mat-grid-tile {
-   color:black;
-   border-style: solid;
-   
-   
-  }
-  .mat-grid-list
-  {
-    border-style: solid;
-  }
-  .container
-  {
-      max-width: 500px;
-     
-      margin-top: 30%;
-      margin-left: 20%;
-  }
-  .buttons
-  {display: flex;
-      max-width:250px;
-      margin-top: 30%;
-      margin-left:100%;
-  }
+  color: black;
+  border-style: solid;
+  height: 100px;
+  width: 100px;
+}
+.mat-grid-list {
+  border-style: solid;
+  width: 300px;
+}
