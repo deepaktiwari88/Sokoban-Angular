@@ -1,21 +1,62 @@
-<div fxLayout="column" fxLayoutAlign="center center" class="canvas-container">
-  <div fxflex>
-    <h1>
-      Level: <span class="level">{{ id }}</span>
-    </h1>
-  </div>
-
-  <div fxFlex>
-    <div class="container">
-      <div class="row" *ngFor="let row of board; let i = index">
-        <div
-          class="column"
-          [ngStyle]="{ 'background-image': setImage(i, j) }"
-          *ngFor="let column of row; let j = index"
-        ></div>
+<div fxLayout="row" fxLayoutAlign="center center">
+  <div fxFlex="30" class="help-container">
+    <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="30px">
+      <div fxFlex>
+        <h1>- Rules -</h1>
+      </div>
+      <div fxFlex>
+        <ul>
+          <li>
+            The objective of Sokoban is to take some objects (usually boxes) to
+            designated locations by pushing them.
+          </li>
+          <li>To do this the user moves a man who we call Sokoban.</li>
+          <li>Sokoban can move up, down, left and right.</li>
+          <li>
+            He can't pass through walls or boxes.
+          </li>
+          <li>He can push only one box at a time (never pull).</li>
+          <li>
+            At any time a square can only be occupied by one of a wall, box or
+            man.
+          </li>
+        </ul>
+      </div>
+      <div fxflex>
+        <img src="src/assets/game.png" />
+      </div>
+      <div fxflex>
+        <button mat-stroked-button [routerLink]="['/home']">
+          Back to Home
+        </button>
       </div>
     </div>
   </div>
+  <div fxLayout="column" fxLayoutAlign="center center" class="canvas-container">
+    <div fxflex="10">
+      <h1>
+        Level: <span class="level">{{ id }}</span>
+      </h1>
+    </div>
+
+    <div fxFlex="10">
+      <h3>
+        Current Moves: 2 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target Moves:
+        {{ targetMoves }}
+      </h3>
+    </div>
+
+    <div fxFlex="60">
+      <div class="container">
+        <div class="row" *ngFor="let row of board; let i = index">
+          <div
+            class="column"
+            [ngStyle]="{ 'background-image': setImage(i, j) }"
+            *ngFor="let column of row; let j = index"
+          ></div>
+        </div>
+      </div>
+    </div>
 
   <div fxFlex>
     <div class="buttons">

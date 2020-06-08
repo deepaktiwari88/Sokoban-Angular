@@ -6,6 +6,13 @@ $border-color: rgba(33, 219, 120, 0.616);
   color: white;
   width: 100%;
 }
+
+.help-container {
+  height: 100vh;
+  background-color: rgb(29, 29, 29);
+  color: white;
+  width: 100%;
+}
 .container {
   position: relative;
   display: block;
@@ -38,4 +45,17 @@ $border-color: rgba(33, 219, 120, 0.616);
 
 .level {
   color: rgb(241, 32, 67);
+}
+
+li {
+  margin: 15px;
+  letter-spacing: 1px;
+  color: rgb(124, 124, 124);
+}
+
+img {
+  padding-top: 50px;
+  display: block;
+  height: 300px;
+  object-fit: contain;
 }
