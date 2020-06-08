@@ -2,9 +2,11 @@
       rel="stylesheet">
 
 <div class="container">
-<mat-grid-list cols="5" rowHeight="50px">
-  <mat-grid-tile *ngFor="let col of rows;let i=index">{{" "}}</mat-grid-tile>
-</mat-grid-list>
+  
+    
+    <div class="row" *ngFor="let column of board; let i = index;">
+      <div class="column" [ngStyle]="{'background-color': setColors(i, j)}" *ngFor="let row of column; let j = index"></div>
+    </div>
 <div class="buttons">
   <button mat-button>
     <i class="material-icons">keyboard_arrow_left</i>
