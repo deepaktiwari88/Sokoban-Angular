@@ -6,19 +6,15 @@ Sokoban is a classical puzzle game in which the player pushes crates or boxes ar
 
 ## Development server
 
-Run `npm i` to install dependencies.
-Run `ng serve` for a dev server.
-Navigate to `http://localhost:4200/`.
-The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1. Run `npm i` to install dependencies.
+2. Run `ng serve` for a dev server.
+3. Navigate to `http://localhost:4200/`.
+4. The app will automatically reload if you change any of the source files.
 
 ## Contributors
 
-[Deepak Tiwari](https://github.com/deepaktiwari88/)
-[Arunav Sharma](https://github.com/arunav11/)
-[Madhav Pruthi](https://github.com/MadhavPruthi/)
+1. [Deepak Tiwari](https://github.com/deepaktiwari88/)
+2. [Arunav Sharma](https://github.com/arunav11/)
+3. [Madhav Pruthi](https://github.com/MadhavPruthi/)
 
 
