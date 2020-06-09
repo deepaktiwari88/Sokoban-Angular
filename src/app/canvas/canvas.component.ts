@@ -230,4 +230,7 @@ export class CanvasComponent implements OnInit {
 
     return [false, -1];
   }
+  refresh(): void {
+    window.location.reload();
+}
 }
