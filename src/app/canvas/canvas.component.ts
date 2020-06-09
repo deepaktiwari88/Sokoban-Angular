@@ -10,6 +10,7 @@ import { areIterablesEqual } from "@angular/core/src/change_detection/change_det
 import { routerNgProbeToken } from "@angular/router/src/router_module";
 import { allLevels } from "src/AllLevels";
 import { SelectMultipleControlValueAccessor } from "@angular/forms";
+import { setRootDomAdapter } from "@angular/platform-browser/src/dom/dom_adapter";
 
 @Component({
   selector: "app-canvas",
@@ -50,14 +51,14 @@ export class CanvasComponent implements OnInit {
   public manPosition: number[];
   public currentMoves: number = 0;
   public hasWon: boolean = false;
-  hasLost: boolean;
+  public hasLost: boolean = false;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private levelService: LevelService,
     private SpinnerService: NgxSpinnerService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.SpinnerService.show();
@@ -143,11 +144,18 @@ export class CanvasComponent implements OnInit {
   }
 
   checkWinningState(): void {
-    setTimeout(() => {
-      this.hasWon =
-        JSON.stringify(this.boxesPosition) ==
-        JSON.stringify(this.targetsPosition);
-    }, 1000);
+
+    var boxesPosition: number[][] = this.boxesPosition;
+    var targetsPosition: number[][] = this.targetsPosition;
+
+    boxesPosition.sort();
+    targetsPosition.sort();
+
+    console.log("BOX" + boxesPosition);
+    console.log("TARGET" + targetsPosition);
+
+    this.hasWon = JSON.stringify(boxesPosition) == JSON.stringify(targetsPosition);
+
   }
 
   moveLeft() {
@@ -246,9 +254,7 @@ export class CanvasComponent implements OnInit {
   increaseMoves(): void {
     this.currentMoves++;
     if (this.currentMoves > this.targetMoves) {
-      setTimeout(() => {
-        this.hasLost = true;
-      }, 1000);
+      this.hasLost = true;
     }
   }
 
