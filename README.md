@@ -4,6 +4,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Sokoban is a classical puzzle game in which the player pushes crates or boxes around in a warehouse, trying to get them to storage locations.
 
+For trial purposes: https://sokoban-35bb0.web.app/
+
 ## Development server
 
 1. Run `npm i` to install dependencies.
