@@ -77,7 +77,10 @@ export class CanvasComponent implements OnInit {
   Navigate(): void {
     if (this.id != this.allLevels.length) {
       var newID: number = this.id + 1;
-      window.location.replace("http://localhost:4200/levels/" + newID);
+      var URL: string = window.location.href;
+
+      var final: string = URL.substring(0, URL.length-1) + newID;
+      window.location.replace(final);
     }
   }
 
