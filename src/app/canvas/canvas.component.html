@@ -20,6 +20,10 @@
             At any time a square can only be occupied by one of a wall, box or
             man.
           </li>
+          <li>
+            Use <b>W</b> key for moving Up, <b>A</b> key for left, <b>S</b> key
+            for down and <b>D</b> key for right.
+          </li>
         </ul>
       </div>
       <div fxflex>
@@ -61,17 +65,17 @@
 
     <div fxFlex>
       <div class="buttons">
-        <button mat-button (click)="moveUp()">
+        <button mat-button (click)="moveUp()" id="up-button">
           <i class="material-icons">keyboard_arrow_up</i>
         </button>
-        <button mat-button (click)="moveDown()">
+        <button mat-button (click)="moveDown()" id="down-button">
           <i class="material-icons">keyboard_arrow_down</i>
         </button>
-        <button mat-button (click)="moveLeft()">
+        <button mat-button (click)="moveLeft()" id="left-button">
           <i class="material-icons">keyboard_arrow_left</i>
         </button>
 
-        <button mat-button (click)="moveRight()">
+        <button mat-button (click)="moveRight()" id="right-button">
           <i class="material-icons">keyboard_arrow_right</i>
         </button>
       </div>

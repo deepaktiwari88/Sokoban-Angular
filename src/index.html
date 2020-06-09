@@ -28,5 +28,29 @@
   </head>
   <body>
     <app-root></app-root>
+    <script>
+    document.addEventListener("keydown", function (event) {
+      if (event.code == "KeyW") {
+        document.getElementById("up-button").click();
+      }
+    });
+    document.addEventListener("keydown", function (event) {
+      if (event.code == "KeyA") {
+        document.getElementById("left-button").click();
+      }
+    });
+    document.addEventListener("keydown", function (event) {
+      if (event.code == "KeyS") {
+        document.getElementById("down-button").click();
+      }
+    });
+    document.addEventListener("keydown", function (event) {
+      if (event.code == "KeyD") {
+        document.getElementById("right-button").click();
+      }
+    });
+  </script>
+
   </body>
 </html>
+
