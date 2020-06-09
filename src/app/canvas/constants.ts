@@ -6,13 +6,13 @@ export const COLORS = {
 };
 
 export const IMAGES = {
-  AVATAR_RIGHT: "src/assets/canvas-images/avatar-right.png",
-  AVATAR_LEFT: "src/assets/canvas-images/avatar-left.png",
-  AVATAR_TOP: "src/assets/canvas-images/avatar-top.png",
-  AVATAR_DOWN: "src/assets/canvas-images/avatar-down.png",
-  BOX_RIGHT: "src/assets/canvas-images/box-right.png",
-  BOX_WRONG: "src/assets/canvas-images/box-wrong.png",
-  BRICK: "src/assets/canvas-images/brick.png",
-  CROSS: "src/assets/canvas-images/cross.png",
-  FREE: "src/assets/canvas-images/free.jpeg",
+  AVATAR_RIGHT: "assets/canvas-images/avatar-right.png",
+  AVATAR_LEFT: "assets/canvas-images/avatar-left.png",
+  AVATAR_TOP: "assets/canvas-images/avatar-top.png",
+  AVATAR_DOWN: "assets/canvas-images/avatar-down.png",
+  BOX_RIGHT: "assets/canvas-images/box-right.png",
+  BOX_WRONG: "assets/canvas-images/box-wrong.png",
+  BRICK: "assets/canvas-images/brick.png",
+  CROSS: "assets/canvas-images/cross.png",
+  FREE: "assets/canvas-images/free.jpeg",
 };

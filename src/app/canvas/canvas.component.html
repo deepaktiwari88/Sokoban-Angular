@@ -27,7 +27,7 @@
         </ul>
       </div>
       <div fxflex>
-        <img src="src/assets/game.png" />
+        <img src="assets/game.png" />
       </div>
       <div fxflex>
         <button mat-stroked-button [routerLink]="['/home']">
@@ -64,11 +64,11 @@
     </div>
 
     <div fxFlex="40" [hidden]="!hasWon">
-      <img class="level-complete" src="src/assets/canvas-images/success.png" />
+      <img class="level-complete" src="assets/canvas-images/success.png" />
     </div>
 
     <div fxFlex="40" [hidden]="!hasLost">
-      <img class="level-complete" src="src/assets/canvas-images/failed.jpg" />
+      <img class="level-complete" src="assets/canvas-images/failed.jpg" />
     </div>
 
     <div fxFlex [hidden]="!hasWon && !hasLost">
