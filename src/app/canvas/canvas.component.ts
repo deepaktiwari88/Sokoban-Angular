@@ -1,10 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { COLORS, BOARD_SIZE, IMAGES } from "./constants";
 import { BROWSER_ANIMATIONS_PROVIDERS } from "@angular/platform-browser/animations/src/providers";
 import { LevelService } from "../services/levels.service";
 import { stringify } from "querystring";
+import { areIterablesEqual } from "@angular/core/src/change_detection/change_detection_util";
+import { routerNgProbeToken } from "@angular/router/src/router_module";
+import { allLevels } from "src/AllLevels";
 
 @Component({
   selector: "app-canvas",
@@ -44,8 +47,10 @@ export class CanvasComponent implements OnInit {
   public targetsPosition: number[][];
   public manPosition: number[];
   public currentMoves: number = 0;
+  public hasWon:boolean = false;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private levelService: LevelService
   ) {}
@@ -63,6 +68,14 @@ export class CanvasComponent implements OnInit {
       this.targetMoves = this.currentLevel["target-moves"];
       this.setBoard();
     });
+  }
+
+  Navigate():void {
+
+      if(this.id != this.allLevels.length){
+        var newID:number = this.id + 1;
+        window.location.replace("http://localhost:4200/levels/" + newID);
+      }
   }
 
   setBoard(): void {
@@ -111,6 +124,7 @@ export class CanvasComponent implements OnInit {
             this.boxesPosition[i][1] == this.targetsPosition[j][1]
           ) {
             returnUrl = "url(" + IMAGES.BOX_RIGHT + ")";
+            this.checkWinningState();
             break;
           }
         }
@@ -118,6 +132,12 @@ export class CanvasComponent implements OnInit {
     }
 
     return returnUrl;
+  }
+
+  checkWinningState():void {
+
+    this.hasWon = JSON.stringify(this.boxesPosition) == JSON.stringify(this.targetsPosition);
+    console.log(this.hasWon);
   }
 
   moveLeft() {
@@ -142,6 +162,7 @@ export class CanvasComponent implements OnInit {
       }
     }
   }
+
   moveRight() {
     var nextRow = this.manPosition[0];
     var nextCol = this.manPosition[1] + 1;
@@ -164,6 +185,7 @@ export class CanvasComponent implements OnInit {
       }
     }
   }
+
   moveUp() {
     var nextRow = this.manPosition[0] - 1;
     var nextCol = this.manPosition[1];
@@ -186,6 +208,7 @@ export class CanvasComponent implements OnInit {
       }
     }
   }
+
   moveDown() {
     var nextRow = this.manPosition[0] + 1;
     var nextCol = this.manPosition[1];
@@ -209,6 +232,7 @@ export class CanvasComponent implements OnInit {
       }
     }
   }
+
   checkBox(i: number, j: number) {
     if (i < 0 || j < 0 || i >= this.rows || j >= this.columns) return false;
 
