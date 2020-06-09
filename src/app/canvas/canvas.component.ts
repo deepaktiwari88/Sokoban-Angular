@@ -5,6 +5,7 @@ import { COLORS, BOARD_SIZE, IMAGES } from "./constants";
 import { BROWSER_ANIMATIONS_PROVIDERS } from "@angular/platform-browser/animations/src/providers";
 import { LevelService } from "../services/levels.service";
 import { stringify } from "querystring";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: "app-canvas",
@@ -47,10 +48,16 @@ export class CanvasComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private levelService: LevelService
+    private levelService: LevelService,
+    private SpinnerService: NgxSpinnerService
   ) {}
 
   ngOnInit() {
+    this.SpinnerService.show();
+
+    setTimeout(() => {
+      this.SpinnerService.hide();
+    }, 2000);
     this.sub = this.route.params.subscribe((params) => {
       this.id = +params["id"];
       this.allLevels = this.levelService.getAllLevels();
@@ -232,5 +239,5 @@ export class CanvasComponent implements OnInit {
   }
   refresh(): void {
     window.location.reload();
-}
+  }
 }

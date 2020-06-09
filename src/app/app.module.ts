@@ -10,6 +10,7 @@ import { CanvasComponent } from "./canvas/canvas.component";
 import { MatGridListModule } from "@angular/material/grid-list";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [AppComponent, LevelsComponent, HomeComponent, CanvasComponent],
@@ -21,6 +22,7 @@ import { MatButtonModule } from "@angular/material/button";
     MatGridListModule,
     MatIconModule,
     MatButtonModule,
+    NgxSpinnerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
