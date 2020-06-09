@@ -6,12 +6,6 @@ import { BROWSER_ANIMATIONS_PROVIDERS } from "@angular/platform-browser/animatio
 import { LevelService } from "../services/levels.service";
 import { stringify } from "querystring";
 import { NgxSpinnerService } from "ngx-spinner";
-import { areIterablesEqual } from "@angular/core/src/change_detection/change_detection_util";
-import { routerNgProbeToken } from "@angular/router/src/router_module";
-import { allLevels } from "src/AllLevels";
-import { SelectMultipleControlValueAccessor } from "@angular/forms";
-import { setRootDomAdapter } from "@angular/platform-browser/src/dom/dom_adapter";
-
 @Component({
   selector: "app-canvas",
   templateUrl: "./canvas.component.html",

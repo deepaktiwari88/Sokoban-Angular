@@ -8,7 +8,7 @@ import { allLevels } from 'src/AllLevels';
 })
 export class LevelsComponent implements OnInit {
 
-  private allLevels: any[];
+  public allLevels: any[];
 
   constructor() { 
     this.allLevels = allLevels;
