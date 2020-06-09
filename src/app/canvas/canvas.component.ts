@@ -48,11 +48,12 @@ export class CanvasComponent implements OnInit {
   public manPosition: number[];
   public currentMoves: number = 0;
   public hasWon:boolean = false;
+  hasLost: boolean;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private levelService: LevelService
+    private levelService: LevelService,
   ) {}
 
   ngOnInit() {
@@ -154,11 +155,11 @@ export class CanvasComponent implements OnInit {
           this.manPosition[1] = this.manPosition[1] - 1;
           this.boxesPosition[index_box][1] =
             this.boxesPosition[index_box][1] - 1;
-          this.currentMoves++;
+          this.increaseMoves();
         }
       } else {
         this.manPosition[1] = this.manPosition[1] - 1;
-        this.currentMoves++;
+        this.increaseMoves();
       }
     }
   }
@@ -177,11 +178,11 @@ export class CanvasComponent implements OnInit {
           this.manPosition[1] = this.manPosition[1] + 1;
           this.boxesPosition[index_box][1] =
             this.boxesPosition[index_box][1] + 1;
-          this.currentMoves++;
+          this.increaseMoves();
         }
       } else {
         this.manPosition[1] = this.manPosition[1] + 1;
-        this.currentMoves++;
+        this.increaseMoves();
       }
     }
   }
@@ -200,11 +201,11 @@ export class CanvasComponent implements OnInit {
           this.manPosition[0] = this.manPosition[0] - 1;
           this.boxesPosition[index_box][0] =
             this.boxesPosition[index_box][0] - 1;
-          this.currentMoves++;
+          this.increaseMoves();
         }
       } else {
         this.manPosition[0] = this.manPosition[0] - 1;
-        this.currentMoves++;
+        this.increaseMoves();
       }
     }
   }
@@ -224,14 +225,22 @@ export class CanvasComponent implements OnInit {
           this.manPosition[0] = this.manPosition[0] + 1;
           this.boxesPosition[index_box][0] =
             this.boxesPosition[index_box][0] + 1;
-          this.currentMoves++;
+          this.increaseMoves();
         }
       } else {
         this.manPosition[0] = this.manPosition[0] + 1;
-        this.currentMoves++;
+        this.increaseMoves();
       }
     }
   }
+
+  increaseMoves():void {
+    this.currentMoves++;
+    if(this.currentMoves > this.targetMoves){
+      this.hasLost = true;
+    }
+  }
+
 
   checkBox(i: number, j: number) {
     if (i < 0 || j < 0 || i >= this.rows || j >= this.columns) return false;
@@ -254,4 +263,8 @@ export class CanvasComponent implements OnInit {
 
     return [false, -1];
   }
+  refresh(): void {
+    window.location.reload();
+}
+
 }

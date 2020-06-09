@@ -20,13 +20,37 @@
       crossorigin="anonymous"
     />
     <meta charset="utf-8" />
-    <title>SokobanAngular</title>
+    <title>Sokoban</title>
     <base href="/" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="assets/logo.ico" />
   </head>
   <body>
     <app-root></app-root>
+    <script>
+    document.addEventListener("keydown", function (event) {
+      if (event.code == "KeyW") {
+        document.getElementById("up-button").click();
+      }
+    });
+    document.addEventListener("keydown", function (event) {
+      if (event.code == "KeyA") {
+        document.getElementById("left-button").click();
+      }
+    });
+    document.addEventListener("keydown", function (event) {
+      if (event.code == "KeyS") {
+        document.getElementById("down-button").click();
+      }
+    });
+    document.addEventListener("keydown", function (event) {
+      if (event.code == "KeyD") {
+        document.getElementById("right-button").click();
+      }
+    });
+  </script>
+
   </body>
 </html>
+

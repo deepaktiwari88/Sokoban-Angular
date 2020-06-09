@@ -20,6 +20,10 @@
             At any time a square can only be occupied by one of a wall, box or
             man.
           </li>
+          <li>
+            Use <b>W</b> key for moving Up, <b>A</b> key for left, <b>S</b> key
+            for down and <b>D</b> key for right.
+          </li>
         </ul>
       </div>
       <div fxflex>
@@ -47,7 +51,7 @@
       </h3>
     </div>
 
-    <div fxFlex="60" [hidden]="hasWon">
+    <div fxFlex="60" [hidden]="hasWon || hasLost">
       <div class="container">
         <div class="row" *ngFor="let row of board; let i = index">
           <div
@@ -63,7 +67,11 @@
      <img class="level-complete" src="src/assets/canvas-images/success.png">
     </div>
 
-    <div fxFlex [hidden]="!hasWon">
+    <div fxFlex="40" [hidden]="!hasLost">
+      <img class="level-complete" src="src/assets/canvas-images/failed.jpg">
+     </div>
+
+    <div fxFlex [hidden]="!hasWon && !hasLost">
       <div class="next-level">
         <button (click)="Navigate()">
           Next Level
@@ -71,7 +79,7 @@
       </div>
      </div>
 
-     <div fxFlex [hidden]="!hasWon">
+     <div fxFlex [hidden]="!hasWon  && !hasLost">
       <div class="retry-level">
         <button (click)="refresh()">
           Retry Level
@@ -79,20 +87,30 @@
       </div>
      </div>
 
-    <div fxFlex [hidden]="hasWon">
+    <div fxFlex [hidden]="hasWon || hasLost">
       <div class="buttons">
-        <button mat-button (click)="moveUp()">
+        <button mat-button [routerLink]="['/levels', id-1]" >
+          Previous Level
+         </button>
+        <button mat-button (click)="moveUp()" id="up-button">
           <i class="material-icons">keyboard_arrow_up</i>
         </button>
-        <button mat-button (click)="moveDown()">
+        <button mat-button (click)="moveDown()" id="down-button">
           <i class="material-icons">keyboard_arrow_down</i>
         </button>
-        <button mat-button (click)="moveLeft()">
+        <button mat-button (click)="moveLeft()" id="left-button">
           <i class="material-icons">keyboard_arrow_left</i>
         </button>
 
-        <button mat-button (click)="moveRight()">
+        <button mat-button (click)="moveRight()" id="right-button">
           <i class="material-icons">keyboard_arrow_right</i>
+        </button>
+        <button mat-button (click)="refresh()" >
+          <i class="material-icons">cached</i>
+        </button>
+        
+        <button mat-button [routerLink]="['/levels', id+1]" >
+         Next Level
         </button>
       </div>
     </div>
