@@ -1,11 +1,15 @@
 import { Component, OnInit } from "@angular/core";
 
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { COLORS, BOARD_SIZE, IMAGES } from "./constants";
 import { BROWSER_ANIMATIONS_PROVIDERS } from "@angular/platform-browser/animations/src/providers";
 import { LevelService } from "../services/levels.service";
 import { stringify } from "querystring";
 import { NgxSpinnerService } from "ngx-spinner";
+import { areIterablesEqual } from "@angular/core/src/change_detection/change_detection_util";
+import { routerNgProbeToken } from "@angular/router/src/router_module";
+import { allLevels } from "src/AllLevels";
+import { SelectMultipleControlValueAccessor } from "@angular/forms";
 
 @Component({
   selector: "app-canvas",
@@ -45,8 +49,11 @@ export class CanvasComponent implements OnInit {
   public targetsPosition: number[][];
   public manPosition: number[];
   public currentMoves: number = 0;
+  public hasWon: boolean = false;
+  hasLost: boolean;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private levelService: LevelService,
     private SpinnerService: NgxSpinnerService
@@ -70,6 +77,13 @@ export class CanvasComponent implements OnInit {
       this.targetMoves = this.currentLevel["target-moves"];
       this.setBoard();
     });
+  }
+
+  Navigate(): void {
+    if (this.id != this.allLevels.length) {
+      var newID: number = this.id + 1;
+      window.location.replace("http://localhost:4200/levels/" + newID);
+    }
   }
 
   setBoard(): void {
@@ -118,6 +132,7 @@ export class CanvasComponent implements OnInit {
             this.boxesPosition[i][1] == this.targetsPosition[j][1]
           ) {
             returnUrl = "url(" + IMAGES.BOX_RIGHT + ")";
+            this.checkWinningState();
             break;
           }
         }
@@ -125,6 +140,14 @@ export class CanvasComponent implements OnInit {
     }
 
     return returnUrl;
+  }
+
+  checkWinningState(): void {
+    setTimeout(() => {
+      this.hasWon =
+        JSON.stringify(this.boxesPosition) ==
+        JSON.stringify(this.targetsPosition);
+    }, 1000);
   }
 
   moveLeft() {
@@ -141,14 +164,15 @@ export class CanvasComponent implements OnInit {
           this.manPosition[1] = this.manPosition[1] - 1;
           this.boxesPosition[index_box][1] =
             this.boxesPosition[index_box][1] - 1;
-          this.currentMoves++;
+          this.increaseMoves();
         }
       } else {
         this.manPosition[1] = this.manPosition[1] - 1;
-        this.currentMoves++;
+        this.increaseMoves();
       }
     }
   }
+
   moveRight() {
     var nextRow = this.manPosition[0];
     var nextCol = this.manPosition[1] + 1;
@@ -163,14 +187,15 @@ export class CanvasComponent implements OnInit {
           this.manPosition[1] = this.manPosition[1] + 1;
           this.boxesPosition[index_box][1] =
             this.boxesPosition[index_box][1] + 1;
-          this.currentMoves++;
+          this.increaseMoves();
         }
       } else {
         this.manPosition[1] = this.manPosition[1] + 1;
-        this.currentMoves++;
+        this.increaseMoves();
       }
     }
   }
+
   moveUp() {
     var nextRow = this.manPosition[0] - 1;
     var nextCol = this.manPosition[1];
@@ -185,14 +210,15 @@ export class CanvasComponent implements OnInit {
           this.manPosition[0] = this.manPosition[0] - 1;
           this.boxesPosition[index_box][0] =
             this.boxesPosition[index_box][0] - 1;
-          this.currentMoves++;
+          this.increaseMoves();
         }
       } else {
         this.manPosition[0] = this.manPosition[0] - 1;
-        this.currentMoves++;
+        this.increaseMoves();
       }
     }
   }
+
   moveDown() {
     var nextRow = this.manPosition[0] + 1;
     var nextCol = this.manPosition[1];
@@ -208,14 +234,24 @@ export class CanvasComponent implements OnInit {
           this.manPosition[0] = this.manPosition[0] + 1;
           this.boxesPosition[index_box][0] =
             this.boxesPosition[index_box][0] + 1;
-          this.currentMoves++;
+          this.increaseMoves();
         }
       } else {
         this.manPosition[0] = this.manPosition[0] + 1;
-        this.currentMoves++;
+        this.increaseMoves();
       }
     }
   }
+
+  increaseMoves(): void {
+    this.currentMoves++;
+    if (this.currentMoves > this.targetMoves) {
+      setTimeout(() => {
+        this.hasLost = true;
+      }, 1000);
+    }
+  }
+
   checkBox(i: number, j: number) {
     if (i < 0 || j < 0 || i >= this.rows || j >= this.columns) return false;
 

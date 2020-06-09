@@ -59,3 +59,32 @@ img {
   height: 300px;
   object-fit: contain;
 }
+
+.level-complete {
+  transition: 0.5s ease-in;
+  height: 100px;
+}
+
+.next-level button {
+  height: 60px;
+  width: 200px;
+  font-size: 25px;
+  background-color: #229954 ;
+  border-style: solid;
+  border-color: #229954;
+  color: white;
+  font-family: "Montserrat";
+  font-weight: bold;
+}
+
+.retry-level button {
+  height: 60px;
+  width: 200px;
+  font-size: 25px;
+  background-color: #3498db;
+  border-style: solid;
+  border-color: #3498db;
+  color: white;
+  font-family: "Montserrat";
+  font-weight: bold;
+}

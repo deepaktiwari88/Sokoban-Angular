@@ -51,7 +51,7 @@
       </h3>
     </div>
 
-    <div fxFlex="60">
+    <div fxFlex="60" [hidden]="hasWon || hasLost">
       <div class="container">
         <div class="row" *ngFor="let row of board; let i = index">
           <div
@@ -63,8 +63,35 @@
       </div>
     </div>
 
-    <div fxFlex>
+    <div fxFlex="40" [hidden]="!hasWon">
+     <img class="level-complete" src="src/assets/canvas-images/success.png">
+    </div>
+
+    <div fxFlex="40" [hidden]="!hasLost">
+      <img class="level-complete" src="src/assets/canvas-images/failed.jpg">
+     </div>
+
+    <div fxFlex [hidden]="!hasWon && !hasLost">
+      <div class="next-level">
+        <button (click)="Navigate()">
+          Next Level
+        </button>
+      </div>
+     </div>
+
+     <div fxFlex [hidden]="!hasWon  && !hasLost">
+      <div class="retry-level">
+        <button (click)="refresh()">
+          Retry Level
+        </button>
+      </div>
+     </div>
+
+    <div fxFlex [hidden]="hasWon || hasLost">
       <div class="buttons">
+        <button mat-button [routerLink]="['/levels', id-1]" >
+          Previous Level
+         </button>
         <button mat-button (click)="moveUp()" id="up-button">
           <i class="material-icons">keyboard_arrow_up</i>
         </button>
@@ -80,6 +107,10 @@
         </button>
         <button mat-button (click)="refresh()">
           <i class="material-icons">cached</i>
+        </button>
+        
+        <button mat-button [routerLink]="['/levels', id+1]" >
+         Next Level
         </button>
       </div>
     </div>
