@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute,Router } from "@angular/router";
 import { COLORS, BOARD_SIZE, IMAGES } from "./constants";
 import { BROWSER_ANIMATIONS_PROVIDERS } from "@angular/platform-browser/animations/src/providers";
 import { LevelService } from "../services/levels.service";
@@ -47,7 +47,8 @@ export class CanvasComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private levelService: LevelService
+    private levelService: LevelService,
+    private router:Router
   ) {}
 
   ngOnInit() {
@@ -233,4 +234,5 @@ export class CanvasComponent implements OnInit {
   refresh(): void {
     window.location.reload();
 }
+
 }

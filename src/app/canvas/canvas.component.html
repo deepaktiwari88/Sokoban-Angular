@@ -65,6 +65,9 @@
 
     <div fxFlex>
       <div class="buttons">
+        <button mat-button [routerLink]="['/levels', id-1]" >
+          Previous Level
+         </button>
         <button mat-button (click)="moveUp()" id="up-button">
           <i class="material-icons">keyboard_arrow_up</i>
         </button>
@@ -80,6 +83,10 @@
         </button>
         <button mat-button (click)="refresh()" >
           <i class="material-icons">cached</i>
+        </button>
+        
+        <button mat-button [routerLink]="['/levels', id+1]" >
+         Next Level
         </button>
       </div>
     </div>
