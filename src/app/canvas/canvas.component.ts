@@ -43,6 +43,7 @@ export class CanvasComponent implements OnInit {
   public boxesPosition: number[][];
   public targetsPosition: number[][];
   public manPosition: number[];
+  public currentMoves: number = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -88,9 +89,6 @@ export class CanvasComponent implements OnInit {
     )
       returnUrl = "url(" + IMAGES.BRICK + ")";
 
-    if (this.manPosition[0] == row && this.manPosition[1] == col)
-      returnUrl = "url(" + IMAGES.AVATAR_RIGHT + ")";
-
     for (var i = 0; i < this.targetsPosition.length; i++) {
       if (
         this.targetsPosition[i][0] == row &&
@@ -100,6 +98,9 @@ export class CanvasComponent implements OnInit {
       }
     }
 
+    if (this.manPosition[0] == row && this.manPosition[1] == col)
+      returnUrl = "url(" + IMAGES.AVATAR_RIGHT + ")";
+
     for (var i = 0; i < this.boxesPosition.length; i++) {
       if (this.boxesPosition[i][0] == row && this.boxesPosition[i][1] == col) {
         returnUrl = "url(" + IMAGES.BOX_WRONG + ")";
@@ -107,7 +108,7 @@ export class CanvasComponent implements OnInit {
         for (var j = 0; j < this.targetsPosition.length; j++) {
           if (
             this.boxesPosition[i][0] == this.targetsPosition[j][0] &&
-            this.boxesPosition[i][1] == this.targetsPosition[j][0]
+            this.boxesPosition[i][1] == this.targetsPosition[j][1]
           ) {
             returnUrl = "url(" + IMAGES.BOX_RIGHT + ")";
             break;
@@ -120,118 +121,113 @@ export class CanvasComponent implements OnInit {
   }
 
   moveLeft() {
-    this.board[this.manPosition[0]][this.manPosition[1]] = false;
+    var nextRow = this.manPosition[0];
+    var nextCol = this.manPosition[1] - 1;
 
-    if (this.checkBox(this.manPosition[0], this.manPosition[1] - 1) == true) {
-      if (
-        this.boxesPosition[0][0] == this.manPosition[0] &&
-        this.manPosition[0][1] == this.manPosition[1] - 1
-      ) {
-        this.manPosition[1] = this.manPosition[1] - 1;
-        this.boxesPosition[0][1] = this.boxesPosition[0][1] - 1;
-       // this.setImage(this.boxesPosition[0][0], this.boxesPosition[0][1]);
-        //this.setImage(this.boxesPosition[1][0], this.boxesPosition[1][1]);
-      } else if (
-        this.boxesPosition[1][0] == this.manPosition[0] &&
-        this.boxesPosition[1][1] == this.manPosition[1] - 1
-      ) {
-        this.manPosition[1] = this.manPosition[1] - 1;
-        this.boxesPosition[1][1] = this.boxesPosition[1][1] - 1;
-      //  this.setImage(this.boxesPosition[1][0], this.boxesPosition[1][1]);
-       // this.setImage(this.boxesPosition[0][0], this.boxesPosition[0][1]);
+    if (this.checkBox(nextRow, nextCol) == true) {
+      if (this.isBoxPresent(nextRow, nextCol)[0]) {
+        if (
+          this.checkBox(nextRow, nextCol - 1) == true &&
+          !this.isBoxPresent(nextRow, nextCol - 1)[0]
+        ) {
+          var index_box = this.isBoxPresent(nextRow, nextCol)[1];
+          this.manPosition[1] = this.manPosition[1] - 1;
+          this.boxesPosition[index_box][1] =
+            this.boxesPosition[index_box][1] - 1;
+          this.currentMoves++;
+        }
       } else {
         this.manPosition[1] = this.manPosition[1] - 1;
+        this.currentMoves++;
       }
     }
-
-    this.board[this.manPosition[0]][this.manPosition[1]] = true;
-    //this.setImage(this.manPosition[0], this.manPosition[1]);
   }
   moveRight() {
-    this.board[this.manPosition[0]][this.manPosition[1]] = false;
+    var nextRow = this.manPosition[0];
+    var nextCol = this.manPosition[1] + 1;
 
-    if (this.checkBox(this.manPosition[0], this.manPosition[1] + 1) == true) {
-      if (
-        this.boxesPosition[0][0] == this.manPosition[0] &&
-        this.boxesPosition[0][1] == this.manPosition[1] + 1
-      ) {
-        this.manPosition[1] = this.manPosition[1] + 1;
-        this.boxesPosition[0][1] = this.boxesPosition[0][1] + 1;
-        this.setImage(this.boxesPosition[0][0], this.boxesPosition[0][1]);
-        this.setImage(this.boxesPosition[1][0], this.boxesPosition[1][1]);
-      } else if (
-        this.boxesPosition[1][0] == this.manPosition[0] &&
-        this.boxesPosition[1][1] == this.manPosition[1] + 1
-      ) {
-        this.manPosition[1] = this.manPosition[1] + 1;
-        this.boxesPosition[1][1] = this.boxesPosition[1][1] + 1;
-        this.setImage(this.boxesPosition[1][0], this.boxesPosition[1][1]);
-        this.setImage(this.boxesPosition[0][0], this.boxesPosition[0][1]);
+    if (this.checkBox(nextRow, nextCol) == true) {
+      if (this.isBoxPresent(nextRow, nextCol)[0]) {
+        if (
+          this.checkBox(nextRow, nextCol + 1) == true &&
+          !this.isBoxPresent(nextRow, nextCol + 1)[0]
+        ) {
+          var index_box = this.isBoxPresent(nextRow, nextCol)[1];
+          this.manPosition[1] = this.manPosition[1] + 1;
+          this.boxesPosition[index_box][1] =
+            this.boxesPosition[index_box][1] + 1;
+          this.currentMoves++;
+        }
       } else {
         this.manPosition[1] = this.manPosition[1] + 1;
+        this.currentMoves++;
       }
     }
-    this.board[this.manPosition[0]][this.manPosition[1]] = true;
-    this.setImage(this.manPosition[0], this.manPosition[1]);
   }
   moveUp() {
-    this.board[this.manPosition[0]][this.manPosition[1]] = false;
+    var nextRow = this.manPosition[0] - 1;
+    var nextCol = this.manPosition[1];
 
-    if (this.checkBox(this.manPosition[0] - 1, this.manPosition[1]) == true) {
-      if (
-        this.boxesPosition[0][0] == this.manPosition[0] - 1 &&
-        this.manPosition[0][1] == this.manPosition[1]
-      ) {
-        this.manPosition[0] = this.manPosition[0] - 1;
-        this.boxesPosition[0][0] = this.boxesPosition[0][0] - 1;
-        this.setImage(this.boxesPosition[0][0], this.boxesPosition[0][1]);
-        this.setImage(this.boxesPosition[1][0], this.boxesPosition[1][1]);
-      } else if (
-        this.boxesPosition[1][0] == this.manPosition[0] - 1 &&
-        this.boxesPosition[1][1] == this.manPosition[1]
-      ) {
-        this.manPosition[0] = this.manPosition[0] - 1;
-        this.boxesPosition[1][0] = this.boxesPosition[1][0] - 1;
-        this.setImage(this.boxesPosition[1][0], this.boxesPosition[1][1]);
-        this.setImage(this.boxesPosition[0][0], this.boxesPosition[0][1]);
+    if (this.checkBox(nextRow, nextCol) == true) {
+      if (this.isBoxPresent(nextRow, nextCol)[0]) {
+        if (
+          this.checkBox(nextRow - 1, nextCol) == true &&
+          !this.isBoxPresent(nextRow - 1, nextCol)[0]
+        ) {
+          var index_box = this.isBoxPresent(nextRow, nextCol)[1];
+          this.manPosition[0] = this.manPosition[0] - 1;
+          this.boxesPosition[index_box][0] =
+            this.boxesPosition[index_box][0] - 1;
+          this.currentMoves++;
+        }
       } else {
         this.manPosition[0] = this.manPosition[0] - 1;
+        this.currentMoves++;
       }
     }
-    this.board[this.manPosition[0]][this.manPosition[1]] = true;
-    this.setImage(this.manPosition[0], this.manPosition[1]);
   }
   moveDown() {
-    this.board[this.manPosition[0]][this.manPosition[1]] = false;
-    if (this.checkBox(this.manPosition[0] + 1, this.manPosition[1]) == true) {
-      if (
-        this.boxesPosition[0][0] == this.manPosition[0] + 1 &&
-        this.manPosition[0][1] == this.manPosition[1]
-      ) {
-        this.manPosition[0] = this.manPosition[0] + 1;
-        this.boxesPosition[0][0] = this.boxesPosition[0][0] + 1;
-        this.setImage(this.boxesPosition[0][0], this.boxesPosition[0][1]);
-        this.setImage(this.boxesPosition[1][0], this.boxesPosition[1][1]);
-      } else if (
-        this.boxesPosition[1][0] == this.manPosition[0] + 1 &&
-        this.boxesPosition[1][1] == this.manPosition[1]
-      ) {
-        this.manPosition[0] = this.manPosition[0] + 1;
-        this.boxesPosition[1][0] = this.boxesPosition[1][0] + 1;
-        this.setImage(this.boxesPosition[1][0], this.boxesPosition[1][1]);
-        this.setImage(this.boxesPosition[0][0], this.boxesPosition[0][1]);
+    var nextRow = this.manPosition[0] + 1;
+    var nextCol = this.manPosition[1];
+
+    if (this.checkBox(nextRow, nextCol) == true) {
+      if (this.isBoxPresent(nextRow, nextCol)[0]) {
+        if (
+          this.checkBox(nextRow + 1, nextCol) == true &&
+          !this.isBoxPresent(nextRow + 1, nextCol)[0]
+        ) {
+          var index_box = this.isBoxPresent(nextRow, nextCol)[1];
+
+          this.manPosition[0] = this.manPosition[0] + 1;
+          this.boxesPosition[index_box][0] =
+            this.boxesPosition[index_box][0] + 1;
+          this.currentMoves++;
+        }
       } else {
         this.manPosition[0] = this.manPosition[0] + 1;
+        this.currentMoves++;
       }
     }
-
-    this.board[this.manPosition[0]][this.manPosition[1]] = true;
-    this.setImage(this.manPosition[0], this.manPosition[1]);
   }
   checkBox(i: number, j: number) {
-    if (this.currentLevel.grid[i][j] == 1) {
+    if (i < 0 || j < 0 || i >= this.rows || j >= this.columns) return false;
+
+    if (
+      this.currentLevel.grid[i][j] == 1 ||
+      this.currentLevel.grid[i][j] == 2
+    ) {
       return false;
     }
     return true;
+  }
+
+  isBoxPresent(row: number, col: number): [boolean, number] {
+    for (let i: number = 0; i < this.boxesPosition.length; i++) {
+      if (this.boxesPosition[i][0] == row && this.boxesPosition[i][1] == col) {
+        return [true, i];
+      }
+    }
+
+    return [false, -1];
   }
 }
