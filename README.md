@@ -14,6 +14,11 @@ Sokoban is a classical puzzle game in which the player pushes crates or boxes ar
 ## Example
 
 ![Homepage](src/assets/github/back.png)
+HomePage
+![Level1](src/assets/github/level1.png)
+Level 1
+![level5](src/assets/github/level2.png)
+Level 5
 
 ## Contributors
 
