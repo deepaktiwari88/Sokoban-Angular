@@ -64,12 +64,12 @@
     </div>
 
     <div fxFlex="40" [hidden]="!hasWon">
-     <img class="level-complete" src="src/assets/canvas-images/success.png">
+      <img class="level-complete" src="src/assets/canvas-images/success.png" />
     </div>
 
     <div fxFlex="40" [hidden]="!hasLost">
-      <img class="level-complete" src="src/assets/canvas-images/failed.jpg">
-     </div>
+      <img class="level-complete" src="src/assets/canvas-images/failed.jpg" />
+    </div>
 
     <div fxFlex [hidden]="!hasWon && !hasLost">
       <div class="next-level">
@@ -77,21 +77,25 @@
           Next Level
         </button>
       </div>
-     </div>
+    </div>
 
-     <div fxFlex [hidden]="!hasWon  && !hasLost">
+    <div fxFlex [hidden]="!hasWon && !hasLost">
       <div class="retry-level">
         <button (click)="refresh()">
           Retry Level
         </button>
       </div>
-     </div>
+    </div>
 
     <div fxFlex [hidden]="hasWon || hasLost">
       <div class="buttons">
-        <button mat-button [routerLink]="['/levels', id-1]" >
+        <button
+          mat-button
+          [disabled]="id - 1 <= 0"
+          [routerLink]="['/levels', id - 1]"
+        >
           Previous Level
-         </button>
+        </button>
         <button mat-button (click)="moveUp()" id="up-button">
           <i class="material-icons">keyboard_arrow_up</i>
         </button>
@@ -108,9 +112,13 @@
         <button mat-button (click)="refresh()">
           <i class="material-icons">cached</i>
         </button>
-        
-        <button mat-button [routerLink]="['/levels', id+1]" >
-         Next Level
+
+        <button
+          mat-button
+          [disabled]="id + 1 > allLevels.length"
+          [routerLink]="['/levels', id + 1]"
+        >
+          Next Level
         </button>
       </div>
     </div>
